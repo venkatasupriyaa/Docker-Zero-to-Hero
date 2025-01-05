@@ -1,18 +1,14 @@
-# Use an official Python image as the base image
-FROM python:3.9-slim
+FROM ubuntu
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy application files into the container
 COPY requirements.txt /app
-COPY devops /app/devops
+COPY devops /app
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    pip install -r requirements.txt && \
+    cd devops
 
 ENTRYPOINT ["python3"]
-
-# Command to run the application
-CMD ["devops/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
