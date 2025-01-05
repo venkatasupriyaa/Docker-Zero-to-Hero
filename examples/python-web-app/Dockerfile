@@ -11,8 +11,8 @@ COPY devops /app/devops
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the application port
-EXPOSE 8000
+
+ENTRYPOINT ["python 3"]
 
 # Command to run the application
-CMD ["python3", "devops/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["devops/manage.py", "runserver", "0.0.0.0:8000"]
