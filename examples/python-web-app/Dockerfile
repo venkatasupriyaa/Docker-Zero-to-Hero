@@ -12,7 +12,7 @@ COPY devops /app/devops
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-ENTRYPOINT ["python 3"]
+ENTRYPOINT ["python3"]
 
 # Command to run the application
 CMD ["devops/manage.py", "runserver", "0.0.0.0:8000"]
