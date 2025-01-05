@@ -1,18 +1,16 @@
-# Use an official Python image as the base image
-FROM python:3.9-slim
+FROM ubuntu:latest
 
-# Set the working directory in the container
+# Set the working directory in the image
 WORKDIR /app
 
-# Copy application files into the container
-COPY requirements.txt /app
-COPY devops /app/devops
+# Copy the files from the host file system to the image file system
+COPY . /app
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install the necessary packages
+RUN apt-get update && apt-get install -y python3 python3-pip
 
-# Expose the application port
-EXPOSE 8000
+# Set environment variables
+ENV NAME World
 
-# Command to run the application
-CMD ["python3", "devops/manage.py", "runserver", "0.0.0.0:8000"]
+# Run a command to start the application
+CMD ["python3", "app.py"]
